@@ -1,1 +1,0 @@
-# Backtracking solver for sudoku puzzles
