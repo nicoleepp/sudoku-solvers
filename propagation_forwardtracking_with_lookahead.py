@@ -1,43 +1,12 @@
-# Source: http://stackoverflow.com/questions/1697334/algorithm-for-solving-sudoku
-# Forward Checking & Look Ahead: http://ktiml.mff.cuni.cz/~bartak/constraints/propagation.html
+# Sources:
+# http://stackoverflow.com/questions/1697334/algorithm-for-solving-sudoku
+# Forward Checking & Look Ahead:
+# http://ktiml.mff.cuni.cz/~bartak/constraints/propagation.html
 
-import sys
 from copy import deepcopy
-
-def output(a):
-    sys.stdout.write(str(a))
 
 N = 9
 
-field = [[5,1,7,6,0,0,0,3,4],
-         [2,8,9,0,0,4,0,0,0],
-         [3,4,6,2,0,5,0,9,0],
-         [6,0,2,0,0,0,0,1,0],
-         [0,3,8,0,0,6,0,4,7],
-         [0,0,0,0,0,0,0,0,0],
-         [0,9,0,0,0,0,0,7,8],
-         [7,0,3,4,0,0,5,6,0],
-         [0,0,0,0,0,0,0,0,0]]
-
-def print_field(field):
-    if not field:
-        output("No solution")
-        return
-    for i in range(N):
-        for j in range(N):
-            cell = field[i][j]
-            if cell == 0 or isinstance(cell, set):
-                output('.')
-            else:
-                output(cell)
-            if (j + 1) % 3 == 0 and j < 8:
-                output(' |')
-
-            if j != 8:
-                output(' ')
-        output('\n')
-        if (i + 1) % 3 == 0 and i < 8:
-            output("- - - + - - - + - - -\n")
 
 def read(field):
     """ Read field into state (replace 0 with set of possible values) """
@@ -47,11 +16,9 @@ def read(field):
         for j in range(N):
             cell = state[i][j]
             if cell == 0:
-                state[i][j] = set(range(1,10))
+                state[i][j] = set(range(1, 10))
 
     return state
-
-state = read(field)
 
 
 def done(state):
@@ -113,6 +80,7 @@ def propagate_step(state):
 
     return True, new_units
 
+
 def propagate(state):
     """ Propagate until we reach a fixpoint """
     while True:
@@ -123,8 +91,10 @@ def propagate(state):
             return True
 
 
-def solve(state):
+def solve(field):
     """ Solve sudoku """
+
+    state = read(field)
 
     solvable = propagate(state)
 
@@ -145,5 +115,3 @@ def solve(state):
                     if solved is not None:
                         return solved
                 return None
-
-print_field(solve(state))
