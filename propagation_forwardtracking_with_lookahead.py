@@ -19,6 +19,16 @@ field = [[5,1,7,6,0,0,0,3,4],
          [7,0,3,4,0,0,5,6,0],
          [0,0,0,0,0,0,0,0,0]]
 
+field2 = [[0,0,0,2,6,0,7,0,1],
+          [6,8,0,0,7,0,0,9,0],
+          [1,9,0,0,0,4,5,0,0],
+          [8,2,0,1,0,0,0,4,0],
+          [0,0,4,6,0,2,9,0,0],
+          [0,5,0,0,0,3,0,2,8],
+          [0,0,9,3,0,0,0,7,4],
+          [0,4,0,0,5,0,0,3,6],
+          [7,0,3,0,1,8,0,0,0]]
+
 def print_field(field):
     if not field:
         output("No solution")
@@ -40,7 +50,7 @@ def print_field(field):
             output("- - - + - - - + - - -\n")
 
 def read(field):
-    """ Read field into state (replace 0 with set of possible values) """
+    # Read field into state (replace 0 with set of possible values)
 
     state = deepcopy(field)
     for i in range(N):
@@ -55,7 +65,7 @@ state = read(field)
 
 
 def done(state):
-    """ Are we done? """
+    # Are we done?
 
     for row in state:
         for cell in row:
@@ -65,7 +75,7 @@ def done(state):
 
 
 def propagate_step(state):
-    """ Propagate one step """
+    # Propagate one step
 
     new_units = False
 
@@ -114,7 +124,7 @@ def propagate_step(state):
     return True, new_units
 
 def propagate(state):
-    """ Propagate until we reach a fixpoint """
+    # Propagate until we reach a fixpoint
     while True:
         solvable, new_unit = propagate_step(state)
         if not solvable:
@@ -124,7 +134,7 @@ def propagate(state):
 
 
 def solve(state):
-    """ Solve sudoku """
+    # Solve sudoku
 
     solvable = propagate(state)
 
