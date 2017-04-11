@@ -4,6 +4,18 @@ from propagation_forwardtracking_with_lookahead import (
 from backtracking import sudokuSolver as backtracking_solver
 from utils import print_sudoku_puzzle, validate_sudoku_solution
 
+'''[# Designed to work against the brute-force algorithm:
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 3, 0, 8, 5],
+    [0, 0, 1, 0, 2, 0, 0, 0, 0],
+    [0, 0, 0, 5, 0, 7, 0, 0, 0],
+    [0, 0, 4, 0, 0, 0, 1, 0, 0],
+    [0, 9, 0, 0, 0, 0, 0, 0, 0],
+    [5, 0, 0, 0, 0, 0, 0, 7, 3],
+    [0, 0, 2, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 4, 0, 0, 0, 9]
+]'''
+
 puzzles = [
     [
         [5, 1, 7, 6, 0, 0, 0, 3, 4],
@@ -78,7 +90,7 @@ for puzzle in puzzles:
     )
 
     # Lookadhead solver
-    print ("Solving with propagation_forward_with_lookadhead: \n")
+    print ("Solving with propagation_forwardtracking_with_lookadhead: \n")
     result = None
     result = lookahead_solver(puzzle)
     print_sudoku_puzzle(result)

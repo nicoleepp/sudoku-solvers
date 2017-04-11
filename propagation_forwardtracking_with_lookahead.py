@@ -9,7 +9,7 @@ N = 9
 
 
 def read(field):
-    """ Read field into state (replace 0 with set of possible values) """
+    # Read field into state (replace 0 with set of possible values)
 
     state = deepcopy(field)
     for i in range(N):
@@ -22,7 +22,7 @@ def read(field):
 
 
 def done(state):
-    """ Are we done? """
+    # Are we done?
 
     for row in state:
         for cell in row:
@@ -32,7 +32,7 @@ def done(state):
 
 
 def propagate_step(state):
-    """ Propagate one step """
+    # Propagate one step
 
     new_units = False
 
@@ -82,7 +82,7 @@ def propagate_step(state):
 
 
 def propagate(state):
-    """ Propagate until we reach a fixpoint """
+    # Propagate until we reach a fixpoint
     while True:
         solvable, new_unit = propagate_step(state)
         if not solvable:
@@ -92,7 +92,7 @@ def propagate(state):
 
 
 def solve(field):
-    """ Solve sudoku """
+    # Solve sudoku
 
     state = read(field)
 
