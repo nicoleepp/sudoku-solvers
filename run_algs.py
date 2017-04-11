@@ -4,6 +4,8 @@ from propagation_forwardtracking_with_lookahead import (
 from backtracking import sudokuSolver as backtracking_solver
 from utils import print_sudoku_puzzle, validate_sudoku_solution
 
+import time
+
 '''[# Designed to work against the brute-force algorithm:
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 3, 0, 8, 5],
@@ -82,21 +84,29 @@ for puzzle in puzzles:
     # Backtracking solver
     print ("Solving with backtracking: \n")
     result = None
+    startTime = time.time() * 1000
     result = backtracking_solver(puzzle)
+    endTime = time.time() * 1000
+    totalTime = endTime - startTime
     print_sudoku_puzzle(result)
 
     print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n"
+        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" +
+        "Runtime was: " + str(totalTime) + "ms" + "\n"
     )
 
     # Lookadhead solver
     print ("Solving with propagation_forwardtracking_with_lookadhead: \n")
     result = None
+    startTime = time.time() * 1000
     result = lookahead_solver(puzzle)
+    endTime = time.time() * 1000
+    totalTime = endTime - startTime
     print_sudoku_puzzle(result)
 
     print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n"
+        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" + 
+        "Runtime was: " + str(totalTime) + "ms" + "\n"
     )
 
     # Sim annealing solver
