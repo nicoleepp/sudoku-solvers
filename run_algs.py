@@ -34,13 +34,14 @@ with open('puzzles.json') as data_file:
     data = json.load(data_file)
     puzzles = data["puzzles"]
 
-    print(puzzles)
-
     for puzzleObject in puzzles:
         newPuzzle = Puzzle(puzzleObject["type"], puzzleObject["puzzle"])
         puzzle = newPuzzle.puzzle
         print("="*60 + "\n" + "="*60 + "\n")
-        print ("Initial puzzle: \n")
+        print(
+            "Puzzle type: " + newPuzzle.type +
+            "\nInitial puzzle: \n"
+        )
         print_sudoku_puzzle(puzzle)
 
         # Backtracking solver
@@ -55,7 +56,6 @@ with open('puzzles.json') as data_file:
         if result is not None:
             print_sudoku_puzzle(result)
             print (
-                "The type of puzzle is: " + newPuzzle.type +
                 "\nThis solution is valid: " + str(validate_sudoku_solution(result)) +
                 "\nRuntime was: " + str(totalTime) + "ms" + "\n"
             )
@@ -74,7 +74,6 @@ with open('puzzles.json') as data_file:
         if result is not None:
             print_sudoku_puzzle(result)
             print (
-                "The type of puzzle is: " + newPuzzle.type + "\n" +
                 "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" + 
                 "Runtime was: " + str(totalTime) + "ms" + "\n"
             )
