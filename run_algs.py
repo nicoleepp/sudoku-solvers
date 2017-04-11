@@ -7,19 +7,20 @@ from utils import print_sudoku_puzzle, validate_sudoku_solution
 
 import time
 
-'''[# Designed to work against the brute-force algorithm:
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 3, 0, 8, 5],
-    [0, 0, 1, 0, 2, 0, 0, 0, 0],
-    [0, 0, 0, 5, 0, 7, 0, 0, 0],
-    [0, 0, 4, 0, 0, 0, 1, 0, 0],
-    [0, 9, 0, 0, 0, 0, 0, 0, 0],
-    [5, 0, 0, 0, 0, 0, 0, 7, 3],
-    [0, 0, 2, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 4, 0, 0, 0, 9]
-]'''
 
 puzzles = [
+    # Designed to work against the brute-force algorithm:
+    # [
+    #     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    #     [0, 0, 0, 0, 0, 3, 0, 8, 5],
+    #     [0, 0, 1, 0, 2, 0, 0, 0, 0],
+    #     [0, 0, 0, 5, 0, 7, 0, 0, 0],
+    #     [0, 0, 4, 0, 0, 0, 1, 0, 0],
+    #     [0, 9, 0, 0, 0, 0, 0, 0, 0],
+    #     [5, 0, 0, 0, 0, 0, 0, 7, 3],
+    #     [0, 0, 2, 0, 1, 0, 0, 0, 0],
+    #     [0, 0, 0, 0, 4, 0, 0, 0, 9]
+    # ],
     [
         [5, 1, 7, 6, 0, 0, 0, 3, 4],
         [2, 8, 9, 0, 0, 4, 0, 0, 0],
@@ -91,11 +92,14 @@ for puzzle in puzzles:
     endTime = time.time() * 1000
     totalTime = endTime - startTime
 
-    print_sudoku_puzzle(result)
-    print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) +
-        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
-    )
+    if result is not None:
+        print_sudoku_puzzle(result)
+        print (
+            "This solution is valid: " + str(validate_sudoku_solution(result)) +
+            "\nRuntime was: " + str(totalTime) + "ms" + "\n"
+        )
+    else:
+        print("No solution found by backtracking algorithm")
 
     # Lookadhead solver
     print ("Solving with propagation_forwardtracking_with_lookadhead: \n")
@@ -106,11 +110,14 @@ for puzzle in puzzles:
     endTime = time.time() * 1000
     totalTime = endTime - startTime
 
-    print_sudoku_puzzle(result)
-    print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) +
-        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
-    )
+    if result is not None:
+        print_sudoku_puzzle(result)
+        print (
+            "This solution is valid: " + str(validate_sudoku_solution(result)) +
+            "\nRuntime was: " + str(totalTime) + "ms" + "\n"
+        )
+    else:
+        print("No solution found by lookahead algorithm")
 
     # Sim annealing solver
     print ("Solving with sim_annealing_solver: \n")
@@ -121,8 +128,11 @@ for puzzle in puzzles:
     endTime = time.time() * 1000
     totalTime = endTime - startTime
 
-    print_sudoku_puzzle(result)
-    print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) +
-        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
-    )
+    if result is not None:
+        print_sudoku_puzzle(result)
+        print (
+            "This solution is valid: " + str(validate_sudoku_solution(result)) +
+            "\nRuntime was: " + str(totalTime) + "ms" + "\n"
+        )
+    else:
+        print("No solution found by simulated annealing algorithm")
