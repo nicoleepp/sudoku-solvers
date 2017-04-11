@@ -2,6 +2,7 @@ from propagation_forwardtracking_with_lookahead import (
     solve as lookahead_solver
 )
 from backtracking import sudokuSolver as backtracking_solver
+from simulated_annealing import sudoku_solver as sim_annealing_solver
 from utils import print_sudoku_puzzle, validate_sudoku_solution
 
 import time
@@ -84,30 +85,44 @@ for puzzle in puzzles:
     # Backtracking solver
     print ("Solving with backtracking: \n")
     result = None
+
     startTime = time.time() * 1000
     result = backtracking_solver(puzzle)
     endTime = time.time() * 1000
     totalTime = endTime - startTime
-    print_sudoku_puzzle(result)
 
+    print_sudoku_puzzle(result)
     print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" +
-        "Runtime was: " + str(totalTime) + "ms" + "\n"
+        "This solution is valid: " + str(validate_sudoku_solution(result)) +
+        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
     )
 
     # Lookadhead solver
     print ("Solving with propagation_forwardtracking_with_lookadhead: \n")
     result = None
+
     startTime = time.time() * 1000
     result = lookahead_solver(puzzle)
     endTime = time.time() * 1000
     totalTime = endTime - startTime
-    print_sudoku_puzzle(result)
 
+    print_sudoku_puzzle(result)
     print (
-        "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" + 
-        "Runtime was: " + str(totalTime) + "ms" + "\n"
+        "This solution is valid: " + str(validate_sudoku_solution(result)) +
+        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
     )
 
     # Sim annealing solver
+    print ("Solving with sim_annealing_solver: \n")
+    result = None
 
+    startTime = time.time() * 1000
+    result = sim_annealing_solver(puzzle)
+    endTime = time.time() * 1000
+    totalTime = endTime - startTime
+
+    print_sudoku_puzzle(result)
+    print (
+        "This solution is valid: " + str(validate_sudoku_solution(result)) +
+        "\nRuntime was: " + str(totalTime) + "ms" + "\n"
+    )
