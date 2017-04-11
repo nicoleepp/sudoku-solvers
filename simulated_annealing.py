@@ -118,15 +118,15 @@ def sudoku_solver(input_data):
     count = 0
 
     while (count < 400000) and best_score != -162:
-        if (count % 1000 == 0):
 
-            # For debugging, comment this print when benchmarking
-            print (
-                "Iteration %s,    \tT = %.5f, \tbest_score = %s,"
-                " \tcurrent_score = %s" % (
-                    count, T, best_score, current_score
-                )
-            )
+        # For debugging, comment this print when benchmarking
+        # if (count % 1000 == 0):
+            # print (
+            #     "Iteration %s,    \tT = %.5f, \tbest_score = %s,"
+            #     " \tcurrent_score = %s" % (
+            #         count, T, best_score, current_score
+            #     )
+            # )
 
         candidate_data = SP.make_candidate_data()
         SP_candidate = SudokuPuzzle(candidate_data, SP.original_entries)
@@ -151,4 +151,3 @@ def sudoku_solver(input_data):
         return best_SP.data
     else:
         return None
-
