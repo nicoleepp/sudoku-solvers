@@ -59,8 +59,10 @@ def solveSudoku(grid, i=0, j=0):
     for e in range(1,10):
         if isValid(grid,i,j,e):
             grid[i][j] = e
+            # Recurse
             if solveSudoku(grid, i, j):
                 return True
+            # If we're not done, go back and retry
             # Undo the current cell for backtracking
             grid[i][j] = 0
     if i == -1:
@@ -86,7 +88,8 @@ def print_field(field):
         output('\n')
         if (i + 1) % 3 == 0 and i < 8:
             output("- - - + - - - + - - -\n")
-        
+
+# Change both of these field values        
 solveSudoku(field2)
 print_field(field2)
 

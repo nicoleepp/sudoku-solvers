@@ -9,6 +9,7 @@ def output(a):
 
 N = 9
 
+
 field = [[5,1,7,6,0,0,0,3,4],
          [2,8,9,0,0,4,0,0,0],
          [3,4,6,2,0,5,0,9,0],
@@ -60,9 +61,6 @@ def read(field):
                 state[i][j] = set(range(1,10))
 
     return state
-
-state = read(field)
-
 
 def done(state):
     # Are we done?
@@ -156,4 +154,6 @@ def solve(state):
                         return solved
                 return None
 
+# Change `field` value only
+state = read(field2)
 print_field(solve(state))
