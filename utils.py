@@ -29,6 +29,19 @@ def validate_sudoku_solution(data_grid):
     We should talk abou this in our report (what conditions are needed to be
     met for a 9 by 9 data grid to be a valid sudoku solution)
     """
+
+    def check_block(data_grid, k):
+        """
+        Get data indices for kth block of puzzle.
+        """
+        row_offset = (k % 3) * 3
+        col_offset = (k // 3) * 3
+        block_data = [
+            data_grid[row_offset+i][col_offset+j] for i in range(3) for
+            j in range(3)
+        ]
+        return sorted(list(set(block_data))) != sorted(block_data)
+
     # check the rows
     for row in data_grid:
         if sorted(list(set(row))) != sorted(row):
@@ -43,5 +56,8 @@ def validate_sudoku_solution(data_grid):
         if sorted(list(set(cols))) != sorted(cols):
             return False
         cols = []
+    # check the blocks
+    for num in range(len(data_grid)):
+        check_block(data_grid, num)
     # if you get past all the false checks return True
     return True
