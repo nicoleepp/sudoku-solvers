@@ -15,14 +15,16 @@ class Puzzle(object):
         self.type = type
         self.puzzle = puzzle
 
-with open('puzzles.json') as data_file:    
-    #data = json.load(data_file)
-    #puzzles = data["puzzles"]
+
+with open('puzzles.json') as data_file:
     data = json.load(data_file)
     puzzles = data["puzzles"]
 
     for puzzleObject in puzzles:
-        newPuzzle = Puzzle(puzzleObject["include"], puzzleObject["type"], puzzleObject["puzzle"])
+        newPuzzle = Puzzle(
+            puzzleObject["include"], puzzleObject["type"],
+            puzzleObject["puzzle"]
+        )
         if newPuzzle.include:
             puzzle = newPuzzle.puzzle
             print("="*60 + "\n" + "="*60 + "\n")
@@ -44,14 +46,15 @@ with open('puzzles.json') as data_file:
             if result is not None:
                 print_sudoku_puzzle(result)
                 print (
-                    "\nThis solution is valid: " + str(validate_sudoku_solution(result)) +
+                    "\nThis solution is valid: " +
+                    str(validate_sudoku_solution(result)) +
                     "\nRuntime was: " + str(totalTime) + "ms" + "\n"
                 )
             else:
                 print("No solution found by backtracking algorithm")
 
             # Lookadhead solver
-            print ("Solving with propagation_forwardtracking_with_lookadhead: \n")
+            print ("Solving with propagation_forwardtracking: \n")
             result = None
 
             startTime = time.time() * 1000
@@ -62,7 +65,8 @@ with open('puzzles.json') as data_file:
             if result is not None:
                 print_sudoku_puzzle(result)
                 print (
-                    "This solution is valid: " + str(validate_sudoku_solution(result)) + "\n" + 
+                    "This solution is valid: " +
+                    str(validate_sudoku_solution(result)) + "\n" +
                     "Runtime was: " + str(totalTime) + "ms" + "\n"
                 )
             else:
@@ -80,9 +84,9 @@ with open('puzzles.json') as data_file:
             if result is not None:
                 print_sudoku_puzzle(result)
                 print (
-                    "This solution is valid: " + str(validate_sudoku_solution(result)) +
+                    "This solution is valid: " +
+                    str(validate_sudoku_solution(result)) +
                     "\nRuntime was: " + str(totalTime) + "ms" + "\n"
                 )
             else:
                 print("No solution found by simulated annealing algorithm")
-
