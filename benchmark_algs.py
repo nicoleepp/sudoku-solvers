@@ -3,6 +3,7 @@ from propagation_forwardtracking_with_lookahead import (
 )
 from backtracking import sudokuSolver as backtracking_solver
 from simulated_annealing import sudoku_solver as sim_annealing_solver
+from exact_cover import solve_sudoku as exact_cover_solver
 
 import json
 import timeit
@@ -41,9 +42,10 @@ def wrapper(func, *args, **kwargs):
 with open('puzzles.json') as data_file:
     data = json.load(data_file)
     puzzles = data["puzzles"]
-    backtracking_stats = Algorithm("backtracking")
-    forwardtracking_stats = Algorithm("forwardtracking")
-    sim_annealing_stats = Algorithm("simulatedannealing")
+    backtracking_stats = Algorithm("Backtracking")
+    forwardtracking_stats = Algorithm("Forwardtracking")
+    sim_annealing_stats = Algorithm("Simulated annealing")
+    exact_cover_stats = Algorithm("Exact cover")
 
     for puzzleObject in puzzles:
         newPuzzle = Puzzle(
@@ -72,6 +74,11 @@ with open('puzzles.json') as data_file:
             sa_time = timeit.timeit(simulatedannealing, number=NUM_TRIES)
             sim_annealing_stats.add_time(sa_time/NUM_TRIES, puzzle_type)
 
+            # Exact cover solver
+            exactcover = wrapper(exact_cover_solver, (3, 3), puzzle)
+            ec_time = timeit.timeit(exactcover, number=NUM_TRIES)
+            exact_cover_stats.add_time(ec_time/NUM_TRIES, puzzle_type)
+
     # print results
     row = "{0:20} {1:15} {2:15}      {3:10}"
     print(row.format(
@@ -93,4 +100,9 @@ with open('puzzles.json') as data_file:
         print(row.format(
             sim_annealing_stats.name, type, sim_annealing_stats.times[type],
             sim_annealing_stats.total_puzzles[type]
+        ))
+    for type in exact_cover_stats.times:
+        print(row.format(
+            exact_cover_stats.name, type, exact_cover_stats.times[type],
+            exact_cover_stats.total_puzzles[type]
         ))

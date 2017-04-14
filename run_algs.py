@@ -3,6 +3,7 @@ from forwardtracking import (
 )
 from backtracking import sudokuSolver as backtracking_solver
 from simulated_annealing import sudoku_solver as sim_annealing_solver
+from exact_cover import solve_sudoku as exact_cover_solver
 from utils import print_sudoku_puzzle, validate_sudoku_solution
 
 import json
@@ -90,3 +91,22 @@ with open('puzzles.json') as data_file:
                 )
             else:
                 print("No solution found by simulated annealing algorithm")
+
+            # Exact cover
+            print ("Solving with exact cover: \n")
+            result = None
+
+            startTime = time.time() * 1000
+            result = exact_cover_solver((3, 3), puzzle)
+            endTime = time.time() * 1000
+            totalTime = endTime - startTime
+
+            if result is not None:
+                print_sudoku_puzzle(result)
+                print (
+                    "\nThis solution is valid: " +
+                    str(validate_sudoku_solution(result)) +
+                    "\nRuntime was: " + str(totalTime) + "ms" + "\n"
+                )
+            else:
+                print("No solution found by exact cover algorithm")

@@ -2,10 +2,11 @@
 # http://stackoverflow.com/questions/1697334/algorithm-for-solving-sudoku
 # Forward Checking & Look Ahead:
 # http://ktiml.mff.cuni.cz/~bartak/constraints/propagation.html
-from utils import print_sudoku_puzzle, validate_sudoku_solution
+from utils import validate_sudoku_solution
 from copy import deepcopy
 
 N = 9
+
 
 def sudokuSolver(field):
     result = solve(field)
@@ -16,6 +17,7 @@ def sudokuSolver(field):
         return None
     else:
         return result
+
 
 def read(field):
     # Read field into state (replace 0 with set of possible values)
