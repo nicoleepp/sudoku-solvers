@@ -1,4 +1,4 @@
-from propagation_forwardtracking_with_lookahead import (
+from forwardtracking import (
     sudokuSolver as lookahead_solver
 )
 from backtracking import sudokuSolver as backtracking_solver
