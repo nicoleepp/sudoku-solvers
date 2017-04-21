@@ -11,6 +11,7 @@ class Puzzle(object):
         self.puzzle = puzzle
         self.clues = clues
 
+
 def countClues(puzzle):
     count = 0
     for i in range(ROWS):
@@ -19,13 +20,15 @@ def countClues(puzzle):
                 count = count + 1
     return count
 
+
 class PuzzleType(object):
     def __init__(self, type):
-    	self.type = type
+        self.type = type
         self.min = 81
         self.max = 0
         self.count = 0
         self.total = 0
+
 
 with open('puzzles.json') as data_file:
     data = json.load(data_file)
@@ -37,7 +40,7 @@ with open('puzzles.json') as data_file:
     insanePuzzles = PuzzleType("Insane")
 
     for puzzleObject in puzzles:
-    	clues = countClues(puzzleObject["puzzle"])
+        clues = countClues(puzzleObject["puzzle"])
         newPuzzle = Puzzle(
             puzzleObject["include"], puzzleObject["type"],
             puzzleObject["puzzle"], clues
@@ -100,4 +103,3 @@ with open('puzzles.json') as data_file:
         insanePuzzles.type, insanePuzzles.min, insanePuzzles.max, insanePuzzles.total/insanePuzzles.count
     ))
     print
-
